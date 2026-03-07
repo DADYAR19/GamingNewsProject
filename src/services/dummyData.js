@@ -1,0 +1,122 @@
+export const dummyNews = [
+  {
+    id: 1,
+    title: "God of War Ragnarök",
+    excerpt: "Kratos and Atreus must journey to each of the Nine Realms in search of answers as Asgardian forces prepare for a prophesied battle that will end the world.",
+    imageUrl: "https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?q=80&w=2670&auto=format&fit=crop",
+    category: "Action",
+    date: "2026-03-07",
+    author: "Santa Monica Studio",
+    platforms: ["PS5", "PS4", "PC"],
+    rating: 4.9,
+    metacritic: 94
+  },
+  {
+    id: 2,
+    title: "Forza Horizon 5",
+    excerpt: "Your ultimate Horizon Adventure awaits! Explore the vibrant and ever-evolving open world landscapes of Mexico with limitless, fun driving action in hundreds of the world’s greatest cars.",
+    imageUrl: "https://images.unsplash.com/photo-1605901309584-818e25960b8f?q=80&w=2638&auto=format&fit=crop",
+    category: "Racing",
+    date: "2026-03-06",
+    author: "Playground Games",
+    platforms: ["Xbox Series X/S", "Xbox One", "PC"],
+    rating: 4.8,
+    metacritic: 92
+  },
+  {
+    id: 3,
+    title: "Call of Duty: Modern Warfare III",
+    excerpt: "In the direct sequel to the record-breaking Modern Warfare II, Captain Price and Task Force 141 face off against the ultimate threat, Vladimir Makarov.",
+    imageUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2670&auto=format&fit=crop",
+    category: "Shooter",
+    date: "2026-03-05",
+    author: "Infinity Ward",
+    platforms: ["PC", "PS5", "Xbox Series X/S"],
+    rating: 4.2,
+    metacritic: 70
+  },
+  {
+    id: 4,
+    title: "Horizon Forbidden West",
+    excerpt: "Join Aloy as she braves the Forbidden West – a majestic but dangerous frontier that conceals mysterious new threats.",
+    imageUrl: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=2670&auto=format&fit=crop",
+    category: "RPG",
+    date: "2026-03-04",
+    author: "Guerrilla Games",
+    platforms: ["PS5", "PS4", "PC"],
+    rating: 4.7,
+    metacritic: 88
+  },
+  {
+    id: 5,
+    title: "Far Cry 6",
+    excerpt: "Welcome to Yara, a tropical paradise frozen in time. As the dictator of Yara, Antón Castillo is intent on restoring his nation back to its former glory by any means.",
+    imageUrl: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2670&auto=format&fit=crop",
+    category: "Action",
+    date: "2026-03-03",
+    author: "Ubisoft",
+    platforms: ["PC", "PS5", "Xbox Series X/S"],
+    rating: 4.1,
+    metacritic: 74
+  },
+  {
+    id: 6,
+    title: "Dead Island 2",
+    excerpt: "A deadly virus is spreading across Los Angeles, turning its inhabitants into ravenous zombies. The city is in quarantine and the military have retreated.",
+    imageUrl: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?q=80&w=2670&auto=format&fit=crop",
+    category: "Action",
+    date: "2026-03-02",
+    author: "Dambuster Studios",
+    platforms: ["PC", "PS5", "Xbox Series X/S"],
+    rating: 4.3,
+    metacritic: 73
+  },
+  {
+    id: 7,
+    title: "Elden Ring",
+    excerpt: "Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.",
+    imageUrl: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop",
+    category: "RPG",
+    date: "2026-03-01",
+    author: "FromSoftware",
+    platforms: ["PC", "PS5", "Xbox Series X/S", "PS4"],
+    rating: 4.9,
+    metacritic: 96
+  },
+  {
+    id: 8,
+    title: "Cyberpunk 2077",
+    excerpt: "Cyberpunk 2077 is an open-world, action-adventure RPG set in the megalopolis of Night City, where you play as a cyberpunk mercenary wrapped up in a do-or-die fight for survival.",
+    imageUrl: "https://images.unsplash.com/photo-1605629921711-2f6b00c6bbf4?q=80&w=2574&auto=format&fit=crop",
+    category: "RPG",
+    date: "2026-02-28",
+    author: "CD Projekt Red",
+    platforms: ["PC", "PS5", "Xbox Series X/S"],
+    rating: 4.5,
+    metacritic: 86
+  },
+  {
+    id: 9,
+    title: "Resident Evil Village",
+    excerpt: "Set a few years after the horrifying events in the critically acclaimed Resident Evil 7 biohazard, the all-new storyline begins with Ethan Winters and his wife Mia living peacefully in a new location.",
+    imageUrl: "https://images.unsplash.com/photo-1551103782-8ab07afd45c1?q=80&w=2670&auto=format&fit=crop",
+    category: "Horror",
+    date: "2026-02-27",
+    author: "Capcom",
+    platforms: ["PC", "PS5", "Xbox Series X/S", "PS4"],
+    rating: 4.6,
+    metacritic: 84
+  },
+  {
+    id: 10,
+    title: "The Legend of Zelda: Tears of the Kingdom",
+    excerpt: "An epic adventure across the land and skies of Hyrule awaits in the Sequel to The Legend of Zelda: Breath of the Wild.",
+    imageUrl: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop",
+    category: "Action",
+    date: "2026-02-26",
+    author: "Nintendo",
+    platforms: ["Nintendo Switch"],
+    rating: 4.9,
+    metacritic: 96
+  }
+];
