@@ -108,13 +108,13 @@ const FeaturedHero = ({ games, isLoading }) => {
 
                       <div className="flex flex-wrap gap-4">
                         <div 
-                          className="px-8 py-4 bg-primary hover:bg-primary-hover text-white rounded-xl font-bold flex items-center gap-2 transition-all transform group-hover/slide:scale-105 shadow-lg shadow-primary/25"
+                          className="px-8 py-4 bg-primary hover:bg-primary-hover text-white rounded-xl font-bold flex items-center gap-2 transition-all transform hover:scale-110 shadow-lg shadow-primary/25 pointer-events-auto"
                         >
                           <Play className="w-5 h-5 fill-white" />
                           View Details
                         </div>
                         <div 
-                          className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-xl font-bold flex items-center gap-2 transition-all backdrop-blur-md border border-white/10"
+                          className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-xl font-bold flex items-center gap-2 transition-all backdrop-blur-md border border-white/10 hover:scale-110 pointer-events-auto"
                         >
                           <Info className="w-5 h-5" />
                           More Info
