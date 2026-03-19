@@ -52,12 +52,16 @@ const CategoryPage = () => {
       }
     } else {
       params.genres = genreSlug || 'action';
+      params.ordering = '-rating';
     }
     
     return params;
   }, [genreSlug, discoverSlug, page]);
 
   const { data: newsData, count, isLoading, error } = useFetchNews(apiParams);
+
+  // Get the first game's background image for the hero, or a fallback
+  const heroImage = newsData?.[0]?.background_image || newsData?.[0]?.imageUrl || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop';
 
   const {
     currentPage,
@@ -88,19 +92,35 @@ const CategoryPage = () => {
   };
 
   return (
-    <>
-      {/* Hero Section */}
-      <section aria-labelledby="category-hero-heading" className="flex flex-col items-center justify-center py-12 mb-12">
-        <h1 id="category-hero-heading" className="text-4xl font-extrabold text-neutral-900 dark:text-white tracking-tight sm:text-5xl md:text-6xl text-center mb-6">
-          <span className="text-primary">{title}</span>
-        </h1>
-        <p className="text-xl text-neutral-600 dark:text-neutral-400 text-center max-w-2xl">
-          Discover the top {title.toLowerCase()} from across the gaming landscape.
-        </p>
+    <div className="relative -mt-8">
+      {/* Cinematic Hero Section */}
+      <section className="relative h-[30vh] min-h-[200px] w-full flex items-center justify-center overflow-hidden mb-12">
+        {/* Background Image with Gradient Mask */}
+        <div className="absolute inset-0 z-0">
+          {!isLoading && (
+            <>
+              <img 
+                src={heroImage} 
+                className="w-full h-full object-cover object-[center_25%] opacity-60 dark:opacity-40 scale-105 animate-slow-zoom" 
+                alt="" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-50/60 via-neutral-50/30 to-transparent dark:from-neutral-900/60 dark:via-neutral-900/30 dark:to-transparent z-10" />
+              <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-neutral-50 dark:from-neutral-900 to-transparent z-20" />
+            </>
+          )}
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-30 text-center px-4 max-w-4xl pt-10">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-neutral-900 dark:text-white tracking-tighter uppercase italic drop-shadow-2xl">
+            {title}
+          </h1>
+        </div>
       </section>
 
       {/* Main Content Section */}
-      <section aria-labelledby="category-news-heading">
+      <div className="px-4 sm:px-6 lg:px-10">
+        <section aria-labelledby="category-news-heading" className="max-w-[1800px] mx-auto">
         {/* Section Header */}
         <div className="mb-8 flex items-end justify-between">
           <div>
@@ -112,7 +132,7 @@ const CategoryPage = () => {
         </div>
 
         {/* News Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-h-[500px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 min-h-[500px]">
           {isLoading
             ? Array.from({ length: 12 }).map((_, index) => (
                 <LoadingSkeleton key={`skeleton-${index}`} />
@@ -135,8 +155,9 @@ const CategoryPage = () => {
             No articles found for this category yet.
           </div>
         )}
-      </section>
-    </>
+        </section>
+      </div>
+    </div>
   );
 };
 

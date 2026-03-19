@@ -24,11 +24,7 @@ const NewsCard = ({ news, index }) => {
   }, [imageUrl]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
+    <div className="h-full">
       <Link to={`/news/${news.id}`} className="group block h-full">
         <motion.article 
           whileHover={{ y: -8 }}
@@ -107,7 +103,7 @@ const NewsCard = ({ news, index }) => {
           </div>
         </motion.article>
       </Link>
-    </motion.div>
+    </div>
   );
 };
 

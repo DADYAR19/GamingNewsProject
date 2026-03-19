@@ -4,7 +4,7 @@ import { ChevronRight } from 'lucide-react';
 import NewsCard from './NewsCard';
 import LoadingSkeleton from './LoadingSkeleton';
 
-const HomeSection = ({ title, data, isLoading, seeAllPath, limit = 4 }) => {
+const HomeSection = ({ title, data, isLoading, seeAllPath, limit = 5 }) => {
   const displayData = data ? data.slice(0, limit) : [];
 
   return (
@@ -30,7 +30,7 @@ const HomeSection = ({ title, data, isLoading, seeAllPath, limit = 4 }) => {
       </div>
 
       {/* Content Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {isLoading ? (
           Array.from({ length: limit }).map((_, i) => (
             <LoadingSkeleton key={`skeleton-${title}-${i}`} />

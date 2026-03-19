@@ -29,12 +29,12 @@ const Home = () => {
     ordering: 'released',
   });
 
-  const featuredGame = trendingData?.[0];
+  const featuredGames = trendingData?.slice(0, 5) || [];
 
   return (
     <div className="pb-16">
       {/* High impact featured hero */}
-      <FeaturedHero game={featuredGame} isLoading={trendingLoading} />
+      <FeaturedHero games={featuredGames} isLoading={trendingLoading} />
 
       {/* Themed sections */}
       <HomeSection
@@ -42,6 +42,7 @@ const Home = () => {
         data={trendingData}
         isLoading={trendingLoading}
         seeAllPath="/discover/top"
+        limit={10}
       />
 
       <HomeSection
@@ -49,6 +50,7 @@ const Home = () => {
         data={psData}
         isLoading={psLoading}
         seeAllPath="/discover/top"
+        limit={5}
       />
 
       <HomeSection
@@ -56,6 +58,7 @@ const Home = () => {
         data={xboxData}
         isLoading={xboxLoading}
         seeAllPath="/discover/top"
+        limit={5}
       />
 
       <HomeSection
@@ -63,6 +66,7 @@ const Home = () => {
         data={soonData}
         isLoading={soonLoading}
         seeAllPath="/discover/coming-soon"
+        limit={5}
       />
     </div>
   );

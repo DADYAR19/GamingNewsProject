@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Heart, ArrowLeft, Gamepad2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useWishlist } from '../context/WishlistContext';
@@ -9,9 +8,7 @@ const Wishlist = () => {
   const { wishlist } = useWishlist();
 
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+    <div 
       className="max-w-[1440px] mx-auto py-8 px-4 sm:px-6 lg:px-10"
     >
       {/* Header */}
@@ -54,7 +51,7 @@ const Wishlist = () => {
           </Link>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 };
 

@@ -11,13 +11,17 @@ import { useWishlist } from '../context/WishlistContext';
 import { toast } from 'react-toastify';
 
 const NewsDetail = () => {
-  const { id } = useParams();
-  const { game, screenshots, isLoading, error } = useGameDetail(id);
+  const { game, screenshots, trailers, isLoading, error } = useGameDetail(id);
   const { toggleWishlist, isInWishlist } = useWishlist();
   const [selectedImage, setSelectedImage] = React.useState(null);
+  const videoSectionRef = React.useRef(null);
   
   const isWishlisted = isInWishlist(parseInt(id) || id);
   
+  const scrollToTrailers = () => {
+    videoSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const handleShare = async () => {
     const shareData = {
       title: game?.name || 'Check out this game!',
@@ -77,9 +81,7 @@ const NewsDetail = () => {
   }
 
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+    <div 
       className="max-w-[1440px] mx-auto py-8 px-4 sm:px-6 lg:px-10"
     >
       {/* Breadcrumb / Back */}
@@ -127,13 +129,25 @@ const NewsDetail = () => {
           </header>
 
           {/* Featured Image / Video */}
-          <section className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl group">
+          <section className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl group cursor-pointer" onClick={trailers?.length > 0 ? scrollToTrailers : undefined}>
             <img 
               src={game.background_image} 
               alt={game.name}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
+            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+              {trailers?.length > 0 && (
+                <motion.div 
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  whileHover={{ scale: 1.1 }}
+                  className="w-20 h-20 bg-primary/90 text-white rounded-full flex items-center justify-center shadow-2xl backdrop-blur-sm ring-4 ring-white/20"
+                >
+                  <Play className="w-10 h-10 fill-white translate-x-1" />
+                </motion.div>
+              )}
+            </div>
+            <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/80 to-transparent">
               <p className="text-white font-medium">Developed by {game.developers?.map(d => d.name).join(', ')}</p>
             </div>
           </section>
@@ -146,6 +160,36 @@ const NewsDetail = () => {
               dangerouslySetInnerHTML={{ __html: game.description }}
             />
           </section>
+
+          {/* Official Trailers Section */}
+          {trailers?.length > 0 && (
+            <section ref={videoSectionRef} className="scroll-mt-24">
+              <h2 className="text-3xl font-bold mb-8 text-neutral-900 dark:text-white flex items-center gap-3">
+                <Play className="w-8 h-8 text-primary fill-primary" />
+                Official Trailers
+              </h2>
+              <div className="space-y-8">
+                {trailers.map((trailer, idx) => (
+                  <div key={trailer.id} className="bg-neutral-100 dark:bg-neutral-800 p-4 rounded-3xl shadow-lg border border-neutral-200 dark:border-neutral-700">
+                    <div className="aspect-video rounded-2xl overflow-hidden bg-black mb-4">
+                      <video 
+                        controls 
+                        poster={trailer.preview}
+                        className="w-full h-full"
+                        preload="none"
+                      >
+                        <source src={trailer.data.max || trailer.data['480']} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                    <h3 className="text-lg font-bold text-neutral-900 dark:text-white px-2">
+                      {trailer.name || `Official Trailer ${idx + 1}`}
+                    </h3>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Screenshot Gallery */}
           {screenshots?.length > 0 && (
@@ -274,7 +318,7 @@ const NewsDetail = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 };
 

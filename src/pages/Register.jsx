@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { Gamepad2, Mail, Lock, User, ArrowRight } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { useAuth } from '../context/AuthContext';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -10,17 +11,20 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate Auth API Call
+    // Simulate account creation and auto-login
     setTimeout(() => {
       setIsLoading(false);
       if (name && email && password) {
-        toast.success('Account created successfully!');
-        navigate('/login');
+        // Save user to AuthContext (and localStorage for persistence)
+        login({ name, email });
+        toast.success(`Welcome, ${name}! Your account has been created.`);
+        navigate('/');
       } else {
         toast.error('Please fill in all fields.');
       }
@@ -29,10 +33,7 @@ const Register = () => {
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+      <div
         className="max-w-md w-full space-y-8 bg-white dark:bg-neutral-900 p-8 rounded-2xl shadow-xl border border-neutral-200 dark:border-neutral-800"
       >
         <div>
@@ -127,7 +128,7 @@ const Register = () => {
             </motion.button>
           </div>
         </form>
-      </motion.div>
+      </div>
     </div>
   );
 };

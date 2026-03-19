@@ -8,6 +8,7 @@ const BASE_URL = 'https://api.rawg.io/api';
 const useGameDetail = (id) => {
   const [game, setGame] = useState(null);
   const [screenshots, setScreenshots] = useState([]);
+  const [trailers, setTrailers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -40,19 +41,22 @@ const useGameDetail = (id) => {
               { id: 101, image: dummyItem.imageUrl },
               { id: 102, image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2670&auto=format&fit=crop' }
             ]);
+            setTrailers([]);
             setError(null);
           }
           return;
         }
 
-        const [detailRes, screenshotRes] = await Promise.all([
+        const [detailRes, screenshotRes, movieRes] = await Promise.all([
           axios.get(`${BASE_URL}/games/${id}?key=${API_KEY}`),
-          axios.get(`${BASE_URL}/games/${id}/screenshots?key=${API_KEY}`)
+          axios.get(`${BASE_URL}/games/${id}/screenshots?key=${API_KEY}`),
+          axios.get(`${BASE_URL}/games/${id}/movies?key=${API_KEY}`)
         ]);
 
         if (isMounted) {
           setGame(detailRes.data);
           setScreenshots(screenshotRes.data.results);
+          setTrailers(movieRes.data.results || []);
           setError(null);
         }
       } catch (err) {
@@ -68,6 +72,7 @@ const useGameDetail = (id) => {
             platforms: [{ platform: { name: 'Multiplatform' } }]
           });
           setScreenshots([{ id: 1, image: dummyItem.imageUrl }]);
+          setTrailers([]);
           setError(null); 
           console.warn('Game detail fetch error, using fallback:', err.message);
         }
@@ -82,7 +87,7 @@ const useGameDetail = (id) => {
     return () => { isMounted = false; };
   }, [id]);
 
-  return { game, screenshots, isLoading, error };
+  return { game, screenshots, trailers, isLoading, error };
 };
 
 export default useGameDetail;

@@ -1,13 +1,8 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 const About = () => {
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div>
       <div className="text-center mb-16">
         <h1 className="text-4xl md:text-5xl font-extrabold text-neutral-900 dark:text-white tracking-tight mb-6">
           About <span className="text-primary">GameNews</span>
@@ -43,7 +38,7 @@ const About = () => {
           Our global team of editors and correspondents are not just journalists; they are lifers in the gaming community. We actively play the games we write about, spanning all genres and platforms from mobile indies to massive AAA blockbusters.
         </p>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

@@ -30,11 +30,7 @@ const Contact = () => {
   };
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div>
       <div className="text-center mb-16">
         <h1 className="text-4xl md:text-5xl font-extrabold text-neutral-900 dark:text-white tracking-tight mb-6">
           Get in <span className="text-primary">Touch</span>
@@ -54,15 +50,14 @@ const Contact = () => {
             <div className="space-y-6">
               <div className="flex items-start">
                 <div className="flex-shrink-0">
-                  <div className="p-3 bg-primary/10 rounded-xl">
+                  <div classNamephew="p-3 bg-primary/10 rounded-xl">
                     <MapPin className="h-6 w-6 text-primary" />
                   </div>
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-medium text-neutral-900 dark:text-white">Our Office</h4>
                   <p className="mt-1 text-neutral-600 dark:text-neutral-400">
-                    123 Gaming Boulevard<br />
-                    San Francisco, CA 94107
+                    Kurdistan, Erbil
                   </p>
                 </div>
               </div>
@@ -76,8 +71,7 @@ const Contact = () => {
                 <div className="ml-4">
                   <h4 className="text-lg font-medium text-neutral-900 dark:text-white">Email Us</h4>
                   <p className="mt-1 text-neutral-600 dark:text-neutral-400">
-                    tips@gamenews.com<br />
-                    press@gamenews.com
+                    dadyarfa2006@gmail.com
                   </p>
                 </div>
               </div>
@@ -91,8 +85,7 @@ const Contact = () => {
                 <div className="ml-4">
                   <h4 className="text-lg font-medium text-neutral-900 dark:text-white">Call Us</h4>
                   <p className="mt-1 text-neutral-600 dark:text-neutral-400">
-                    +1 (555) 123-4567<br />
-                    Mon-Fri, 9am - 6pm PST
+                    +964 750 868 6979
                   </p>
                 </div>
               </div>
@@ -187,7 +180,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

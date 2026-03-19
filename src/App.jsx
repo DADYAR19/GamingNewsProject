@@ -8,15 +8,15 @@ import { WishlistProvider } from './context/WishlistContext';
 import MainLayout from './layouts/MainLayout';
 
 // Lazy loaded routes for Code Splitting
-const Home = lazy(() => import('./pages/Home'));
-const NewsDetail = lazy(() => import('./pages/NewsDetail'));
-const Login = lazy(() => import('./pages/Login'));
-const Register = lazy(() => import('./pages/Register'));
-const About = lazy(() => import('./pages/About'));
-const Contact = lazy(() => import('./pages/Contact'));
-const CategoryPage = lazy(() => import('./pages/CategoryPage'));
-const Wishlist = lazy(() => import('./pages/Wishlist'));
-const NotFound = lazy(() => import('./pages/NotFound'));
+const Home = lazy(() => import('./pages/Home.jsx'));
+const NewsDetail = lazy(() => import('./pages/NewsDetail.jsx'));
+const Login = lazy(() => import('./pages/Login.jsx'));
+const Register = lazy(() => import('./pages/Register.jsx'));
+const About = lazy(() => import('./pages/About.jsx'));
+const Contact = lazy(() => import('./pages/Contact.jsx'));
+const CategoryPage = lazy(() => import('./pages/CategoryPage.jsx'));
+const Wishlist = lazy(() => import('./pages/Wishlist.jsx'));
+const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 
 // A simple loading fallback for suspense
 const PageLoader = () => (
@@ -31,7 +31,6 @@ function App() {
       <AuthProvider>
         <WishlistProvider>
           <HashRouter>
-            <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route element={<MainLayout />}>
                   <Route path="/" element={<Home />} />
@@ -40,12 +39,12 @@ function App() {
                   <Route path="/genre/:genreSlug" element={<CategoryPage />} />
                   <Route path="/discover/:discoverSlug" element={<CategoryPage />} />
                   <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="*" element={<NotFound />} />
                 </Route>
               </Routes>
-            </Suspense>
           </HashRouter>
           <ToastContainer position="bottom-right" theme="colored" />
         </WishlistProvider>
