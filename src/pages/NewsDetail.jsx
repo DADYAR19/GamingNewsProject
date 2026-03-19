@@ -129,26 +129,14 @@ const NewsDetail = () => {
             </div>
           </header>
 
-          {/* Featured Image / Video */}
-          <section className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl group cursor-pointer" onClick={trailers?.length > 0 ? scrollToTrailers : undefined}>
+          {/* Featured Image */}
+          <section className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl group">
             <img 
               src={game.background_image} 
               alt={game.name}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-              {trailers?.length > 0 && (
-                <motion.div 
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  whileHover={{ scale: 1.1 }}
-                  className="w-20 h-20 bg-primary/90 text-white rounded-full flex items-center justify-center shadow-2xl backdrop-blur-sm ring-4 ring-white/20"
-                >
-                  <Play className="w-10 h-10 fill-white translate-x-1" />
-                </motion.div>
-              )}
-            </div>
-            <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/80 to-transparent">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
               <p className="text-white font-medium">Developed by {game.developers?.map(d => d.name).join(', ')}</p>
             </div>
           </section>
