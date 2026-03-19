@@ -12,16 +12,11 @@ import { toast } from 'react-toastify';
 
 const NewsDetail = () => {
   const { id } = useParams();
-  const { game, screenshots, trailers, isLoading, error } = useGameDetail(id);
+  const { game, screenshots, isLoading, error } = useGameDetail(id);
   const { toggleWishlist, isInWishlist } = useWishlist();
   const [selectedImage, setSelectedImage] = React.useState(null);
-  const videoSectionRef = React.useRef(null);
   
   const isWishlisted = isInWishlist(parseInt(id) || id);
-  
-  const scrollToTrailers = () => {
-    videoSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   const handleShare = async () => {
     const shareData = {
@@ -149,36 +144,6 @@ const NewsDetail = () => {
               dangerouslySetInnerHTML={{ __html: game.description }}
             />
           </section>
-
-          {/* Official Trailers Section */}
-          {trailers?.length > 0 && (
-            <section ref={videoSectionRef} className="scroll-mt-24">
-              <h2 className="text-3xl font-bold mb-8 text-neutral-900 dark:text-white flex items-center gap-3">
-                <Play className="w-8 h-8 text-primary fill-primary" />
-                Official Trailers
-              </h2>
-              <div className="space-y-8">
-                {trailers.map((trailer, idx) => (
-                  <div key={trailer.id} className="bg-neutral-100 dark:bg-neutral-800 p-4 rounded-3xl shadow-lg border border-neutral-200 dark:border-neutral-700">
-                    <div className="aspect-video rounded-2xl overflow-hidden bg-black mb-4">
-                      <video 
-                        controls 
-                        poster={trailer.preview}
-                        className="w-full h-full"
-                        preload="none"
-                      >
-                        <source src={trailer.data.max || trailer.data['480']} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    </div>
-                    <h3 className="text-lg font-bold text-neutral-900 dark:text-white px-2">
-                      {trailer.name || `Official Trailer ${idx + 1}`}
-                    </h3>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
 
           {/* Screenshot Gallery */}
           {screenshots?.length > 0 && (
