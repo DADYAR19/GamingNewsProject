@@ -54,9 +54,26 @@ const useGameDetail = (id) => {
         ]);
 
         if (isMounted) {
-          setGame(detailRes.data);
+          const gameData = detailRes.data;
+          const movieData = movieRes.data.results || [];
+          
+          // Combine movies and clip if available
+          const allTrailers = [...movieData];
+          if (gameData.clip) {
+            allTrailers.unshift({
+              id: 'clip',
+              name: 'Game Clip',
+              preview: gameData.clip.preview,
+              data: {
+                max: gameData.clip.clip,
+                '480': gameData.clip.clip
+              }
+            });
+          }
+
+          setGame(gameData);
           setScreenshots(screenshotRes.data.results);
-          setTrailers(movieRes.data.results || []);
+          setTrailers(allTrailers);
           setError(null);
         }
       } catch (err) {
