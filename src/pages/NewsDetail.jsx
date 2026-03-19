@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, Clock, User, Share2, MessageSquare, 
-  Star, Globe, Monitor, Trophy, Gamepad2, Info, Heart, Play
+  Star, Globe, Monitor, Trophy, Gamepad2, Info, Heart, Play, X
 } from 'lucide-react';
 import useGameDetail from '../hooks/useGameDetail';
 import LoadingSkeleton from '../components/LoadingSkeleton';
@@ -256,8 +256,7 @@ const NewsDetail = () => {
               <img 
                 src={selectedImage} 
                 alt="Enlarged Screenshot" 
-                className="max-w-full max-h-full object-contain rounded-xl shadow-2xl pointer-events-auto cursor-default"
-                onClick={(e) => e.stopPropagation()}
+                className="max-w-full max-h-full object-contain rounded-xl shadow-2xl pointer-events-auto cursor-zoom-out"
               />
               
               {/* Close Button UI */}
@@ -266,7 +265,7 @@ const NewsDetail = () => {
                 className="absolute top-0 right-0 -mt-12 sm:-mt-8 sm:-mr-8 p-3 text-white/70 hover:text-white transition-colors pointer-events-auto"
                 aria-label="Close Preview"
               >
-                <Share2 className="w-8 h-8 rotate-45" /> {/* Using Share2 rotated as X since X is not easily accessible here without more imports or I can just use X if it was there */}
+                <X className="w-8 h-8" />
               </button>
             </motion.div>
           </motion.div>
