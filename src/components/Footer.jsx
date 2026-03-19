@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Gamepad2, Github, Twitter, Youtube, Mail, MapPin, Phone, ExternalLink } from 'lucide-react';
+import { Gamepad2, Github, Instagram, MessageCircle, Mail, MapPin, Phone, ExternalLink } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -18,9 +18,9 @@ const Footer = () => {
       { name: 'Cookie Policy', path: '#' },
     ],
     social: [
-      { name: 'Twitter', icon: Twitter, href: 'https://twitter.com', color: 'hover:text-[#1DA1F2]' },
-      { name: 'YouTube', icon: Youtube, href: 'https://youtube.com', color: 'hover:text-[#FF0000]' },
-      { name: 'GitHub', icon: Github, href: 'https://github.com', color: 'hover:text-[#333]' },
+      { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/dadyar_19', color: 'hover:text-[#E4405F]' },
+      { name: 'GitHub', icon: Github, href: 'https://github.com/dadyar19', color: 'hover:text-[#333]' },
+      { name: 'Discord', icon: MessageCircle, href: '#', color: 'hover:text-[#5865F2]', username: 'dadyar_19' },
     ]
   };
 
