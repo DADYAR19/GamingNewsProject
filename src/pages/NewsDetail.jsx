@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, Clock, User, Share2, MessageSquare, 
-  Star, Globe, Monitor, Trophy, Gamepad2, Info, Heart
+  Star, Globe, Monitor, Trophy, Gamepad2, Info, Heart, Play
 } from 'lucide-react';
 import useGameDetail from '../hooks/useGameDetail';
 import LoadingSkeleton from '../components/LoadingSkeleton';
@@ -11,6 +11,7 @@ import { useWishlist } from '../context/WishlistContext';
 import { toast } from 'react-toastify';
 
 const NewsDetail = () => {
+  const { id } = useParams();
   const { game, screenshots, trailers, isLoading, error } = useGameDetail(id);
   const { toggleWishlist, isInWishlist } = useWishlist();
   const [selectedImage, setSelectedImage] = React.useState(null);
