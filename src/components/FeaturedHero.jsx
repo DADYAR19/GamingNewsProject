@@ -62,7 +62,7 @@ const FeaturedHero = ({ games, isLoading }) => {
           return (
             <SwiperSlide key={game.id} className="w-full h-full relative">
               {({ isActive }) => (
-                <>
+                <Link to={`/news/${game.id}`} className="block w-full h-full relative overflow-hidden group/slide">
                   {/* Background Image */}
                   <div className="absolute inset-0 w-full h-full">
                     <img 
@@ -94,7 +94,7 @@ const FeaturedHero = ({ games, isLoading }) => {
                         </div>
                       </div>
 
-                      <h1 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tight leading-tight">
+                      <h1 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tight leading-tight group-hover/slide:text-primary transition-colors">
                         {title}
                       </h1>
 
@@ -107,23 +107,22 @@ const FeaturedHero = ({ games, isLoading }) => {
                       </div>
 
                       <div className="flex flex-wrap gap-4">
-                        <Link 
-                          to={`/news/${game.id}`}
-                          className="px-8 py-4 bg-primary hover:bg-primary-hover text-white rounded-xl font-bold flex items-center gap-2 transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-primary/25"
+                        <div 
+                          className="px-8 py-4 bg-primary hover:bg-primary-hover text-white rounded-xl font-bold flex items-center gap-2 transition-all transform group-hover/slide:scale-105 shadow-lg shadow-primary/25"
                         >
                           <Play className="w-5 h-5 fill-white" />
                           View Details
-                        </Link>
-                        <button 
+                        </div>
+                        <div 
                           className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-xl font-bold flex items-center gap-2 transition-all backdrop-blur-md border border-white/10"
                         >
                           <Info className="w-5 h-5" />
                           More Info
-                        </button>
+                        </div>
                       </div>
                     </motion.div>
                   </div>
-                </>
+                </Link>
               )}
             </SwiperSlide>
           );
