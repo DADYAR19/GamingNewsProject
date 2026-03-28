@@ -19,7 +19,7 @@ const NewsDetail = () => {
   const isWishlisted = isInWishlist(parseInt(id) || id);
   
   const storeStyles = {
-    'steam': { color: 'bg-[#66c0f4] hover:bg-[#4ea5d9]', icon: <ShoppingCart className="w-4 h-4" /> },
+    'steam': { color: 'bg-[#1b2838] hover:bg-[#2a475e]', icon: <ShoppingCart className="w-4 h-4" /> },
     'epic-games': { color: 'bg-[#2a2a2a] hover:bg-[#3b3b3b]', icon: <ShoppingCart className="w-4 h-4" /> },
     'playstation-store': { color: 'bg-[#003791] hover:bg-[#0048bc]', icon: <Monitor className="w-4 h-4" /> },
     'xbox-store': { color: 'bg-[#107c10] hover:bg-[#159f15]', icon: <Monitor className="w-4 h-4" /> },
