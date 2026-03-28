@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, Clock, User, Share2, MessageSquare, 
-  Star, Globe, Monitor, Trophy, Gamepad2, Info, Heart, Play, X
+  Star, Globe, Monitor, Trophy, Gamepad2, Info, Heart, Play, X, ShoppingCart
 } from 'lucide-react';
 import useGameDetail from '../hooks/useGameDetail';
 import LoadingSkeleton from '../components/LoadingSkeleton';
@@ -17,6 +17,18 @@ const NewsDetail = () => {
   const [selectedImage, setSelectedImage] = React.useState(null);
   
   const isWishlisted = isInWishlist(parseInt(id) || id);
+  
+  // Store branding styles mapping
+  const storeStyles = {
+    'steam': { color: 'bg-[#171a21] hover:bg-[#2a475e]', icon: <ShoppingCart className="w-4 h-4" /> },
+    'epic-games': { color: 'bg-[#2a2a2a] hover:bg-[#3b3b3b]', icon: <ShoppingCart className="w-4 h-4" /> },
+    'playstation-store': { color: 'bg-[#003791] hover:bg-[#0048bc]', icon: <Monitor className="w-4 h-4" /> },
+    'xbox-store': { color: 'bg-[#107c10] hover:bg-[#159f15]', icon: <Monitor className="w-4 h-4" /> },
+    'gog': { color: 'bg-[#65279d] hover:bg-[#7b31bf]', icon: <ShoppingCart className="w-4 h-4" /> },
+    'nintendo': { color: 'bg-[#e60012] hover:bg-[#ff0014]', icon: <Gamepad2 className="w-4 h-4" /> },
+    'app-store': { color: 'bg-[#0071e3] hover:bg-[#0086ff]', icon: <Monitor className="w-4 h-4" /> },
+    'google-play': { color: 'bg-[#34a853] hover:bg-[#3ebf5f]', icon: <Monitor className="w-4 h-4" /> }
+  };
 
   const handleShare = async () => {
     const shareData = {
@@ -186,7 +198,35 @@ const NewsDetail = () => {
                 </div>
               </div>
 
-              <div>
+              {game.stores?.length > 0 && (
+                <div className="space-y-4 pt-2">
+                  <p className="text-xs font-bold text-neutral-400 uppercase tracking-widest mb-1">Available On</p>
+                  <div className="grid grid-cols-1 gap-2.5">
+                    {game.stores.map((s) => {
+                      const style = storeStyles[s.store.slug] || { color: 'bg-neutral-800 hover:bg-neutral-700', icon: <ShoppingCart className="w-4 h-4" /> };
+                      const storeUrl = s.url && s.url.startsWith('http') ? s.url : `https://www.google.com/search?q=${encodeURIComponent(game.name + ' ' + s.store.name)}`;
+                      
+                      return (
+                        <a 
+                          key={s.id || s.store.id}
+                          href={storeUrl} 
+                          target="_blank" 
+                          rel="noreferrer"
+                          className={`flex items-center justify-between gap-3 w-full px-5 py-4 ${style.color} text-white rounded-2xl font-bold transition-all shadow-md active:scale-[0.98] group`}
+                        >
+                          <div className="flex items-center gap-3">
+                            {style.icon}
+                            <span className="text-sm font-bold tracking-tight">{s.store.name}</span>
+                          </div>
+                          <span className="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest bg-white/10 px-2 py-0.5 rounded-lg border border-white/10">Visit Store</span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              <div className="pt-2 border-t border-neutral-100 dark:border-neutral-700">
                 <p className="text-xs font-bold text-neutral-400 uppercase tracking-widest mb-3">Publisher</p>
                 <p className="text-neutral-900 dark:text-white font-medium">{game.publishers?.map(p => p.name).join(', ') || 'N/A'}</p>
               </div>

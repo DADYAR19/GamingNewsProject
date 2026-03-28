@@ -34,7 +34,25 @@ const useGameDetail = (id) => {
               genres: [{ name: dummyItem.category }],
               platforms: dummyItem.platforms?.map(p => ({ platform: { name: p } })) || [{ platform: { name: 'PC' } }],
               publishers: [{ name: dummyItem.author }],
-              website: 'https://rawg.io'
+              website: 'https://rawg.io',
+              stores: [
+                {
+                  store: { name: 'Steam', slug: 'steam' },
+                  url: 'https://store.steampowered.com'
+                },
+                {
+                  store: { name: 'Epic Games', slug: 'epic-games' },
+                  url: 'https://www.epicgames.com'
+                },
+                {
+                  store: { name: 'PlayStation Store', slug: 'playstation-store' },
+                  url: 'https://store.playstation.com'
+                },
+                {
+                  store: { name: 'Xbox Store', slug: 'xbox-store' },
+                  url: 'https://www.xbox.com'
+                }
+              ]
             });
             setScreenshots([
               { id: 101, image: dummyItem.imageUrl },
