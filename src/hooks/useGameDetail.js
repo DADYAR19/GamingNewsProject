@@ -63,13 +63,25 @@ const useGameDetail = (id) => {
           return;
         }
 
-        const [detailRes, screenshotRes] = await Promise.all([
+        const [detailRes, screenshotRes, storesRes] = await Promise.all([
           axios.get(`${BASE_URL}/games/${id}?key=${API_KEY}`),
-          axios.get(`${BASE_URL}/games/${id}/screenshots?key=${API_KEY}`)
+          axios.get(`${BASE_URL}/games/${id}/screenshots?key=${API_KEY}`),
+          axios.get(`${BASE_URL}/games/${id}/stores?key=${API_KEY}`)
         ]);
 
         if (isMounted) {
-          setGame(detailRes.data);
+          // Merge store URLs from the dedicated endpoint into the main game object
+          const gameData = detailRes.data;
+          const storeUrls = storesRes.data.results || [];
+          
+          if (gameData.stores) {
+            gameData.stores = gameData.stores.map(s => {
+              const matchingStore = storeUrls.find(su => su.store_id === s.store.id);
+              return { ...s, url: matchingStore?.url || s.url };
+            });
+          }
+
+          setGame(gameData);
           setScreenshots(screenshotRes.data.results);
           setError(null);
         }
