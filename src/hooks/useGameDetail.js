@@ -72,9 +72,20 @@ const useGameDetail = (id) => {
         if (isMounted) {
           const gameData = detailRes.data;
           
-          // Fetch Price from CheapShark by Title
+          // Fetch Price from CheapShark with Smart Search
           try {
-            const priceRes = await axios.get(`https://www.cheapshark.com/api/1.0/games?title=${encodeURIComponent(gameData.name)}&limit=1`);
+            // Step 1: Try the full title
+            let priceRes = await axios.get(`https://www.cheapshark.com/api/1.0/games?title=${encodeURIComponent(gameData.name)}&limit=1`);
+            
+            // Step 2: Fallback to sanitized title if no results
+            if (!priceRes.data?.[0]) {
+              // Remove everything after a colon, dash, or parenthesis to get the core title
+              const sanitizedTitle = gameData.name.split(/[:\-(]/)[0].trim();
+              if (sanitizedTitle !== gameData.name) {
+                priceRes = await axios.get(`https://www.cheapshark.com/api/1.0/games?title=${encodeURIComponent(sanitizedTitle)}&limit=1`);
+              }
+            }
+
             if (priceRes.data?.[0]) {
               gameData.cheapestPrice = priceRes.data[0].cheapest;
               gameData.cheapSharkID = priceRes.data[0].gameID;
