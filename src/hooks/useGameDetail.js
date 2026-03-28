@@ -70,8 +70,19 @@ const useGameDetail = (id) => {
         ]);
 
         if (isMounted) {
-          // Merge store URLs from the dedicated endpoint into the main game object
           const gameData = detailRes.data;
+          
+          // Fetch Price from CheapShark by Title
+          try {
+            const priceRes = await axios.get(`https://www.cheapshark.com/api/1.0/games?title=${encodeURIComponent(gameData.name)}&limit=1`);
+            if (priceRes.data?.[0]) {
+              gameData.cheapestPrice = priceRes.data[0].cheapest;
+              gameData.cheapSharkID = priceRes.data[0].gameID;
+            }
+          } catch (pErr) {
+            console.warn('Could not fetch price from CheapShark:', pErr.message);
+          }
+
           const storeUrls = storesRes.data.results || [];
           
           if (gameData.stores) {

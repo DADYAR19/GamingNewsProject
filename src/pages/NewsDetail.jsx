@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, Clock, User, Share2, MessageSquare, 
-  Star, Globe, Monitor, Trophy, Gamepad2, Info, Heart, Play, X, ShoppingCart
+  Star, Globe, Monitor, Trophy, Gamepad2, Info, Heart, Play, X, ShoppingCart, Tag
 } from 'lucide-react';
 import useGameDetail from '../hooks/useGameDetail';
 import LoadingSkeleton from '../components/LoadingSkeleton';
@@ -113,6 +113,12 @@ const NewsDetail = () => {
                   Metascore: {game.metacritic}
                 </span>
               )}
+              {game.cheapestPrice && (
+                <span className="px-4 py-1.5 bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 text-xs font-bold rounded-full border border-yellow-500/20 flex items-center gap-1.5">
+                  <Tag className="w-3.5 h-3.5" />
+                  Starting from ${game.cheapestPrice}
+                </span>
+              )}
             </div>
             
             <h1 className="text-4xl md:text-6xl font-black text-neutral-900 dark:text-white leading-tight mb-8">
@@ -215,7 +221,12 @@ const NewsDetail = () => {
                         >
                           <div className="flex items-center gap-3">
                             {style.icon}
-                            <span className="text-sm font-bold tracking-tight">{s.store.name}</span>
+                            <div className="flex flex-col">
+                              <span className="text-sm font-bold tracking-tight">{s.store.name}</span>
+                              {game.cheapestPrice && s.store.slug === 'steam' && (
+                                <span className="text-[10px] opacity-80 font-medium">As low as ${game.cheapestPrice}</span>
+                              )}
+                            </div>
                           </div>
                           <span className="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest bg-white/10 px-2 py-0.5 rounded-lg border border-white/10">Visit Store</span>
                         </a>
