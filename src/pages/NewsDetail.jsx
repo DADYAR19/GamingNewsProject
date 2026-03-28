@@ -113,12 +113,6 @@ const NewsDetail = () => {
                   Metascore: {game.metacritic}
                 </span>
               )}
-              {game.cheapestPrice && (
-                <span className="px-4 py-1.5 bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 text-xs font-bold rounded-full border border-yellow-500/20 flex items-center gap-1.5">
-                  <Tag className="w-3.5 h-3.5" />
-                  Starting from ${game.cheapestPrice}
-                </span>
-              )}
             </div>
             
             <h1 className="text-4xl md:text-6xl font-black text-neutral-900 dark:text-white leading-tight mb-8">
@@ -187,6 +181,41 @@ const NewsDetail = () => {
 
         {/* Right Column: Meta Info Cards */}
         <aside className="space-y-8">
+          {/* Featured Steam Price Card */}
+          {game.cheapestPrice && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-[#1b2838] p-8 rounded-3xl shadow-2xl border-t-2 border-[#66c0f4] text-white relative overflow-hidden group"
+            >
+              {/* Subtle Logo Watermark */}
+              <div className="absolute top-0 right-0 p-4 opacity-5 translate-x-1/4 -translate-y-1/4 scale-150 rotate-12">
+                <ShoppingCart className="w-32 h-32" />
+              </div>
+
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <p className="text-[#66c0f4] text-xs font-black uppercase tracking-[0.2em] mb-4">Current Steam Price</p>
+                <div className="flex items-baseline gap-1 mb-2">
+                  <span className="text-2xl font-bold opacity-70">$</span>
+                  <span className="text-6xl font-black tracking-tight drop-shadow-lg">{game.cheapestPrice}</span>
+                </div>
+                <p className="text-sm font-medium opacity-60 mb-8 max-w-[200px]">Live data from CheapShark deals database</p>
+                
+                {game.stores?.find(s => s.store.slug === 'steam')?.url && (
+                  <a 
+                    href={game.stores.find(s => s.store.slug === 'steam').url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full py-4 bg-[#66c0f4] hover:bg-[#4ea5d9] text-[#1b2838] rounded-2xl font-black text-lg transition-all shadow-xl shadow-[#66c0f4]/15 active:scale-95 flex items-center justify-center gap-3"
+                  >
+                    <ShoppingCart className="w-6 h-6" />
+                    Buy on Steam
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          )}
+
           {/* Action Card */}
           <div className="bg-white dark:bg-neutral-800 p-8 rounded-3xl shadow-xl border border-neutral-100 dark:border-neutral-700 sticky top-24">
             <h3 className="text-xl font-bold mb-6 text-neutral-900 dark:text-white">Game Details</h3>
@@ -223,9 +252,6 @@ const NewsDetail = () => {
                             {style.icon}
                             <div className="flex flex-col">
                               <span className="text-sm font-bold tracking-tight">{s.store.name}</span>
-                              {game.cheapestPrice && s.store.slug === 'steam' && (
-                                <span className="text-[10px] opacity-80 font-medium">As low as ${game.cheapestPrice}</span>
-                              )}
                             </div>
                           </div>
                           <span className="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest bg-white/10 px-2 py-0.5 rounded-lg border border-white/10">Visit Store</span>
